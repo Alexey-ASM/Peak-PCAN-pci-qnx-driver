@@ -1,0 +1,19 @@
+import boost ;
+boost.use-project ;
+
+import os ;
+
+INSTALL_PATH = [ os.environ INSTALL_PATH ] ;
+
+if ! $(INSTALL_PATH)
+{
+    INSTALL_PATH = dist ;
+}
+
+install $(INSTALL_PATH) : canrmd :
+    <variant>release:<location>$(INSTALL_PATH)/release
+    <variant>debug:<location>$(INSTALL_PATH)/debug 
+	<install-dependencies>on 
+    <install-type>EXE
+	<install-type>PDB
+	;
