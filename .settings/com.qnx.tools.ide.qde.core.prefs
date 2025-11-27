@@ -1,0 +1,13 @@
+container/Build\ Target/candump/build_position=0
+container/Build\ Target/candump/location=C\:/work/QNX700workspace/peak_can_res_mgr/candump
+container/Build\ Target/candump/status=true
+container/Build\ Target/candump/stop_on_error=false
+container/Build\ Target/candump/target=build
+container/Build\ Target/candump/variant=*
+container/Build\ Target/resmgr/build_position=1
+container/Build\ Target/resmgr/location=C\:/work/QNX700workspace/peak_can_res_mgr/resmgr
+container/Build\ Target/resmgr/status=true
+container/Build\ Target/resmgr/stop_on_error=false
+container/Build\ Target/resmgr/target=build
+container/Build\ Target/resmgr/variant=*
+eclipse.preferences.version=1

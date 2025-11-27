@@ -1,0 +1,24 @@
+project
+	: requirements 
+    <toolset>qcc:<define>_QNX_SOURCE #__EXT_POSIX1_199309
+	<toolset>qcc:<define>__STRICT_ANSI__
+	
+	;
+
+exe canrmd :
+		can_controller.cpp
+		can_manager.cpp
+		chip_mapper_io.cpp
+		chip_mapper_memory.cpp
+		controller_factory.cpp
+		peak_can_res_mgr.cpp
+		sja1000_can_controller.cpp
+		unit_cthread.cpp
+		log.cpp
+		: 
+		<include>.
+		
+		<linkflags>"-lpci -lslog2"
+
+		<target-os>qnxnto:<library>/user-config//atomic
+        ;
