@@ -6,19 +6,23 @@ project
 	;
 
 exe canrmd :
-		can_controller.cpp
-		can_manager.cpp
-		chip_mapper_io.cpp
-		chip_mapper_memory.cpp
-		controller_factory.cpp
-		peak_can_res_mgr.cpp
-		sja1000_can_controller.cpp
-		unit_cthread.cpp
-		log.cpp
+		src/can_controller.cpp
+		src/can_manager.cpp
+		src/chip_mapper_io.cpp
+		src/chip_mapper_memory.cpp
+		src/controller_factory.cpp
+		src/peak_can_res_mgr.cpp
+		src/sja1000_can_controller.cpp
+		src/unit_cthread.cpp
+		src/log.cpp
 		: 
 		<include>.
+		<include>src/
+		<include>../common/include/
 		
-		<linkflags>"-lpci -lslog2"
+		
+		<linkflags>-lpci
+		<linkflags>-lslog2
 
 		<target-os>qnxnto:<library>/user-config//atomic
         ;

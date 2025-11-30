@@ -12,7 +12,7 @@ ChipMapperMemory::ChipMapperMemory(std::uint64_t baseAddr, std::uint64_t size, s
 {
     LOG(info) << "pBaseAddr: " << std::hex << baseAddr
               << " size: " << size
-              << " shift: " <<std::dec << int(shift);
+              << " shift: " << std::dec << int(shift);
 
     if (shift > 8) 
     {
@@ -28,7 +28,7 @@ ChipMapperMemory::ChipMapperMemory(std::uint64_t baseAddr, std::uint64_t size, s
         throw std::runtime_error("Could not map device memory region");
     }
 
-    LOG(info) << "Done: baseAddr_: " << std::hex << baseAddr_;
+    LOG(debug) << "Done: baseAddr: " << std::hex << baseAddr_;
 }
 
 //------------------------------------------------------------------------------------------------

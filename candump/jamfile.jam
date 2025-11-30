@@ -1,0 +1,14 @@
+project
+	: requirements 
+    <toolset>qcc:<define>_QNX_SOURCE #__EXT_POSIX1_199309
+	<toolset>qcc:<define>__STRICT_ANSI__
+	
+	;
+
+exe candump :
+		candump.cpp
+		: 
+		<include>.
+		<include>../common/include/
+	
+        ;

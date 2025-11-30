@@ -10,7 +10,15 @@ if ! $(INSTALL_PATH)
     INSTALL_PATH = dist ;
 }
 
-install $(INSTALL_PATH) : canrmd :
+path-constant PROJECT_ROOT : . ;
+
+use-project /resmgr : resmgr ;
+use-project /candump : candump ;
+
+build-project resmgr ;
+build-project candump ;
+
+install $(INSTALL_PATH) : resmgr candump :
     <variant>release:<location>$(INSTALL_PATH)/release
     <variant>debug:<location>$(INSTALL_PATH)/debug 
 	<install-dependencies>on 

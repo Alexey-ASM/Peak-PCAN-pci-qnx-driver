@@ -70,8 +70,6 @@ bool SJA1000CanController::InitController()
         0x7A       // 10K     TSEG1=11  TSEG2=8  75%
     };
 
-    LOG(info);
-
     if(CanController::InitController() == false) 
     {
         LOG(error) << "Controller init error";
@@ -132,7 +130,7 @@ bool SJA1000CanController::InitController()
 
     inited_ = true;
 
-    LOG(info) << "Done";
+    LOG(info) << "Controller inited";
 
     return true;
 }
@@ -141,7 +139,7 @@ bool SJA1000CanController::InitController()
 
 bool SJA1000CanController::IsThereDevice()
 {
-    LOG(info);
+    LOG(debug);
 
     GetByte(&sja1000Map_->statusReg);
     GetByte(&sja1000Map_->ArbLostCap);    // arbitration lost capture
@@ -187,7 +185,7 @@ bool SJA1000CanController::IsThereDevice()
         return false;
     }
 
-    LOG(info) << "Done";
+    LOG(debug) << "Done";
 
     return true;
 }

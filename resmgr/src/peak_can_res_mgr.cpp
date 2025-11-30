@@ -6,7 +6,7 @@
 #include "log.h"
 
 #include "can_manager.h"
-#include <controller_factory.h>
+#include "controller_factory.h"
 
 //------------------------------------------------------------------------------
 
@@ -35,13 +35,14 @@ CanManager*       canManager = 0;
 resmgr_context_t* ctp = 0;
 char* __progname;
 
+std::string drvRegPrefix("/dev/");
+
 //------------------------------------------------------------------------------------------------
 
 void Finalize(void)
 {
-    std::cout << "Finalizing..." << std::endl;
-
-    LOG(info) << "Finalizing...";
+    std::cout << "Stopping " << drvRegPrefix;
+    LOG(info) << "Stopping " << drvRegPrefix;
 
     if (ctp != 0)
     {
@@ -55,6 +56,8 @@ void Finalize(void)
     {
         delete canManager;
     }
+
+    LOG(info) << drvRegPrefix << " Stopped.";
 }
 
 //------------------------------------------------------------------------------------------------
@@ -86,7 +89,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::string drvRegPrefix("/dev/");
     std::string drvRegName("can0");
 
     resmgr_connect_funcs_t  connect_funcs;
@@ -289,6 +291,7 @@ int main(int argc, char *argv[])
             else
             {
                 std::cout << "Resource manager is registered as: " << drvRegPrefix << std::endl;
+                LOG(info) << "Resource manager is registered as: " << drvRegPrefix;
 
                 /* allocate a context structure */
                 ctp = resmgr_context_alloc(dpp);

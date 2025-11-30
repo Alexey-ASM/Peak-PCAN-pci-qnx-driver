@@ -270,7 +270,7 @@ bool ControllerFactory::PCIAttachDevice(const pci_vid_t nVendorID, const pci_did
         }
     }
 
-    LOG(info) << "Done: " << result;
+    LOG(debug) << "Done: " << result;
 
     return result;
 }
