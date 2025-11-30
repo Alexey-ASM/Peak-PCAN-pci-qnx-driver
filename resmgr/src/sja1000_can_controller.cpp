@@ -523,9 +523,10 @@ std::uint8_t SJA1000CanController::TransmitMessage(const can_frame& canFrame)
 
     transmitBufferFree_ = false;
 
-    PutByte(&sja1000Map_->RxTxFrInf,
-            ((canFrame.can_id >> 24) & (EXTENDED_FRAME_FORMAT | REMOTE_REQUEST)) |
-             (canFrame.len & DATA_LENGTH_MASK));
+    const std::uint8_t rxTxFrInf = (((canFrame.can_id >> 24) & (EXTENDED_FRAME_FORMAT | REMOTE_REQUEST)) |
+            (canFrame.len & DATA_LENGTH_MASK));
+
+    PutByte(&sja1000Map_->RxTxFrInf, rxTxFrInf);
     
     size_t dataOffset = 2;
 

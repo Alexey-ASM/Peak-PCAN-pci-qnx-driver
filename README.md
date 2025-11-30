@@ -28,6 +28,8 @@ struct can_frame {
 };
 ```
 
+includes **cansend** and **candump** utilities similar to Linux can utils.
+
 ## Features
 
 - Resource manager for PEAK PCAN-PCI cards
@@ -50,9 +52,15 @@ struct can_frame {
 ## Project Structure
 
 ```
-├── common/     # Common files
-├── resmgr/     # Peak CAN resource manger (driver)
-├── candump/    # candump utility to dump CAN messages
+├── candump/   # Utility to dump CAN messages
+├── cansend/   # Utility to send CAN messages
+├── common/    # Shared files
+├── resmgr/    # Peak CAN resource manager (driver)
+├── README.md  # Documentation
+├── LICENSE    # License file
+├── CHANGELOG.md
+├── jamroot.jam
+
 ```
 
 ## Build
@@ -62,19 +70,22 @@ ready to build as QNX projects with project files or Boost build
 ## Usage
 
 ```sh
-canrmd [-d device] [-s bus_speed]
+# Start resource manager
+canrmd -d can1 -s 800
+
+# Send a CAN message
+cansend can1 123#DEADBEEF
+
+# Dump CAN messages
+candump can1
 ```
 
 ### Options
 
-- `-d device` : Specify PCAN device node (e.g., `/dev/can0`)
+- `-d device` : Specify PCAN device node (e.g., `can0`)
 - `-s bus_speed` : Bus speed in kbit per second (e.g., 125 for 125kbit/s)
 
-### Example
-
-```sh
-canrmd -d /dev/can1 -s 800
-```
+Possible speeds: 10, 20, 50, 100, 125, 250, 500, 800, 1000
 
 ## Notes
 

@@ -13,13 +13,6 @@
 
 #include <can.h>
 
-
-//#define MAXSOCK 16 /* max. number of CAN interfaces given on the cmdline */
-//#define MAXIFNAMES 30 /* size of receive name index to omit ioctls */
-//#define MAXCOL 6 /* number of different colors for colorized output */
-//#define ANYDEV "any" /* name of interface to receive from any CAN interface */
-#define ANL "\r\n" /* newline in ASC mode */
-
 #define SILENT_INI 42 /* detect user setting on commandline */
 #define SILENT_OFF 0 /* no silent mode */
 #define SILENT_ON 1 /* silent mode (completely silent) */
@@ -48,7 +41,6 @@ void PrintUsage(void)
 	std::cout << "         -s          (silent mode)" << std::endl;
 	std::cout << "         -l          (log CAN-frames into file. Sets '-s (silent mode) by default)" << std::endl;
 	std::cout << "         -f <fname>  (log CAN-frames into file <fname>. Sets '-s "<< SILENT_ON << "' by default)" << std::endl;
-//	std::cout << "         -L          (use log file format on stdout)" << std::endl;
 	std::cout << "         -n <count>  (terminate after reception of <count> CAN frames)" << std::endl;
 	std::cout << "         -e          (dump CAN error frames in human-readable format)" << std::endl;
 	std::cout << "         -T <msecs>  (terminate after <msecs> if no frames were received)" << std::endl;
@@ -167,7 +159,6 @@ void ParseCanFilter(const std::string& str, std::vector<can_filter>& filters)
     uint32_t can_id, can_mask;
     char separator;
 
-    // Try format: "can_id:can_mask"
     if (iss >> std::hex >> can_id >> separator >> std::hex >> can_mask)
     {
         if (separator == ':')
@@ -180,13 +171,7 @@ void ParseCanFilter(const std::string& str, std::vector<can_filter>& filters)
             }
             return;
         }
-    }
 
-    // Reset stream and try format: "can_id~can_mask"
-    iss.clear();
-    iss.str(str);
-    if (iss >> std::hex >> can_id >> separator >> std::hex >> can_mask)
-    {
         if (separator == '~')
         {
         	filters.emplace_back(can_filter{can_id | CAN_INV_FILTER, can_mask & ~CAN_ERR_FLAG});
@@ -358,11 +343,6 @@ int main(int argc, char *argv[]) {
 	{
 		ParseCanFilter(tokens[i], canFilters);
 	}
-
-//    for (const auto& str : canFilters)
-//    {
-//        std::cout << "[" << std::hex << str.can_id << " " << str.can_mask << "]" << std::dec << std::endl;
-//    }
 
     if (-1 == canController)
     {

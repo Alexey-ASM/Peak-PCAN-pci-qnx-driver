@@ -14,11 +14,13 @@ path-constant PROJECT_ROOT : . ;
 
 use-project /resmgr : resmgr ;
 use-project /candump : candump ;
+use-project /cansend : cansend ;
 
 build-project resmgr ;
 build-project candump ;
+build-project cansend ;
 
-install $(INSTALL_PATH) : resmgr candump :
+install $(INSTALL_PATH) : resmgr candump cansend :
     <variant>release:<location>$(INSTALL_PATH)/release
     <variant>debug:<location>$(INSTALL_PATH)/debug 
 	<install-dependencies>on 
